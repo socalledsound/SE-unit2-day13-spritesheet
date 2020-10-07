@@ -25,13 +25,17 @@ class Sprite {
   show() {
     let index = floor(this.index) % this.len;
     image(this.animation[index], this.x, this.y, this.size, this.size);
+
+  
   }
 
   animate() {
     //increment the index and the position of x
     this.index += this.speed;
 
+
   }
+
 }
 
 

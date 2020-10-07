@@ -10,19 +10,20 @@
 
 let spritesheet;
 let spritedata;
-
+let counter = 0;
 let animation = [];
 
 // let abstract;
 let abstractions = [];
-
+let abstractions2D = [];
+let numRows = 20, numColumns = 20;
 function preload() {
   spritedata = loadJSON('abstract/abstract.json');
   spritesheet = loadImage('abstract/abstract.png');
 }
 
 function setup() {
-  createCanvas(640, 480);
+  createCanvas(640, 640);
   
   //this is the array from our JSON file
   let frames = spritedata.frames;
@@ -37,23 +38,49 @@ function setup() {
   //make an instance of the Sprite class
   // abstract = new Sprite(animation, 100, 100, 320, 0.25);
 
-  for (let i = 0; i < 5; i++) {
-    abstractions[i] = new Sprite(animation, i * 100, 100, 160, random(0.1, 0.4));
+
+  abstractions2D = make2darray(numColumns, numRows);
+
+  for(let i = 0; i < numColumns; i++){
+    for(let j = 0; j < numRows; j++){
+
+      abstractions2D[i][j] = new Sprite(animation, i * 32, j * 32, 32, random(0.1,0.4));
+    }
   }
+  console.log(abstractions2D);
 }
 
 function draw() {
   background(0);
-
+  // translate(width/4, height/2);
   //use the sprite class to show and animate the spritesheet
   // abstract.show();
   // abstract.animate();
 
 
-  for (let abstraction of abstractions) {
-    abstraction.show();
-    abstraction.animate();
+  for(let i = 0; i < numColumns; i++){
+    for(let j = 0; j < numRows; j++){
+      abstractions2D[i][j].show();
+      abstractions2D[i][j].animate();
+    }
+  
   }
 
-  // image(animation[frameCount % animation.length], 0, 0);
-}
+  counter++
+
+  }
+
+
+
+
+  function make2darray(cols, rows){
+
+    let array = new Array(cols);
+    
+    for(let i=0; i < array.length; i++){
+    
+      array[i] = new Array(rows);
+    
+    }
+    return array
+  }
