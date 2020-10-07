@@ -9,7 +9,7 @@
 // https://youtu.be/3noMeuufLZY
 
 class Sprite {
-  constructor(animation, x, y, speed) {
+  constructor(animation, x, y, size, speed) {
     this.x = x;
     this.y = y;
     this.animation = animation;
@@ -17,22 +17,26 @@ class Sprite {
     this.len = this.animation.length;
     this.speed = speed;
     this.index = 0;
+    this.size = size;
   }
 
 
   //notice the use of modulo to keeop the value of index in range of the number of images, ie this.len.....
   show() {
     let index = floor(this.index) % this.len;
-    image(this.animation[index], this.x, this.y);
+    image(this.animation[index], this.x, this.y, this.size, this.size);
   }
 
   animate() {
     //increment the index and the position of x
     this.index += this.speed;
-    this.x += this.speed * 15;
-    //if this.x exceeds the screen, send it back to the beginning of the screen.....
-    if (this.x > width) {
-      this.x = -this.w;
-    }
+
   }
 }
+
+
+    // this.x += this.speed * 15;
+    //if this.x exceeds the screen, send it back to the beginning of the screen.....
+    // if (this.x > width) {
+    //   this.x = -this.w;
+    // }
